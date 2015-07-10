@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # game.rb : game main
 #
 #
@@ -10,16 +11,46 @@ require 'player.rb'
 require 'board.rb'
 
 class Game
+
+
   def run
-    p "hello"
-    myfunc
+    #二枚配る
+    card = @board.hit
+    @sum = @sum + card.bjnumber
+    puts card.number
+    card = @board.hit
+    @sum = @sum + card.bjnumber
+    puts card.number
+
+    #勝負するか、カードを追加するか
+    while(1)
+      action = @player1.actionCard
+      if(action == 0)
+        puts "勝負します"
+        puts @sum
+        break
+      elsif(action == 1)
+        puts "追加します"
+        card = @board.hit
+        @sum = @sum + card.bjnumber
+        puts card.number
+      end
+      if(@sum >= 22)
+        puts "バストです"
+        break
+      end
+    end
+
+    #p "hello"
+    #myfunc
   end
 
   def initialize
     @my = Myfunc.new
-    # @player1 = Player.new
+    @player1 = Player.new
     # @player2 = Player.new
-    # @board = Board.new
+    @board = Board.new
+    @sum = 0	
   end
 
   def somefunc
